@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Generateur de regles OPR</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="">Générateur de règles OPR</h1>
+    <div class="row">
+        <div class="col-4">
+            <input type="button" class="btn btn-primary"
+                   onclick="doRoll()"
+                   value="Roll for Rules"
+            />
+        </div>
+    </div>
+    <div class="row pt-2" id="results">
+        <div class="col-2" id="deployment">
+
+        </div>
+        <div class="col-6" id="mission">
+
+        </div>
+    </div>
+</div>
+<script>
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max) ;
+    }
+    function doRoll() {
+        let resultDiv = document.getElementById('results');
+        let depDiv = document.getElementById('deployment');
+        let missionDiv = document.getElementById('mission');
+
+        let deployment = getRandomInt(6);
+        let missionStyle = getRandomInt(3);
+        let mission = getRandomInt(6);
+
+        let deploymentResult = [
+            "No Man's Land",
+            "Long Haul",
+            "Flank Assault",
+            "Frontal Clash",
+            "Tactical Push",
+            "Meeting Engagement"
+        ];
+
+        let missionStyleArray = [
+            "Face-Off",
+            "Progressive Scoring",
+            "Attack & Defend",
+        ];
+
+        let missionArray = {
+            "Face-Off" : {
+                "1":"Duel",
+                "2":"Seize Ground",
+                "3":"Relic Hunt",
+                "4":"Sabotage",
+                "5":"Breakthrough",
+                "6":"King of the Hill",
+            },
+            "Progressive Scoring" : {
+                "1":"Pitched Battle",
+                "2":"Domination",
+                "3":"Capture & Hold",
+                "4":"Demolition",
+                "5":"Headquarters",
+                "6":"Mosh Pit",
+            },
+            "Attack & Defend" : {
+                "1":"The Raid",
+                "2":"Smash & Grab",
+                "3":"Ambush",
+                "4":"Last Stand",
+                "5":"VIP Escort",
+                "6":"The Rescue",
+            },
+        };
+
+        let missionStyleString = '';
+        let missionString = '';
+
+        for (var i in missionArray) {
+            if (i === missionStyleArray[missionStyle]) {
+                missionStyleString = i;
+                missionString = missionArray[i][mission+1];
+            }
+        }
+
+        depDiv.innerHTML =
+            `<p>Déploiement :</p>` +
+            `<p class="fw-bold">${deploymentResult[deployment]}</p>`
+        ;
+
+        missionDiv.innerHTML =
+            `<p>Mission n°${missionStyle+1}.${mission+1}:</p>` +
+            `<p>${missionStyleString} : ${missionString}</p>`
+        ;
+    }
+</script>
+</body>
+</html>
