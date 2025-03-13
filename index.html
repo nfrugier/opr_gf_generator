@@ -1,121 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Generateur de regles OPR</title>
-</head>
-<body class="bg-dark text-light">
-<div class="container">
-    <h1 class="text-uppercase text-center h2">Générateur&nbsp;de&nbsp;règles&nbsp;OPR</h1>
-    <div class="row">
-        <div class="text-center">
-            <input type="button" class="btn btn-primary"
-                   onclick="doRoll()"
-                   value="Roll for Rules"
-            />
-        </div>
-    </div>
-    <div class="row pt-2" >
-        <div>
-            <div class="card text-dark bg-light mb-3">
-                <div class="card-body">
-                    <div class="card-title"><span class="fw-bold text-uppercase">Déploiement</span></div>
-                    <div class="card-text" id="deployment"></div>
+<html lang="fr">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Generateur de regles OPR</title>
+    </head>
+    <body class="bg-dark text-light">
+        <div class="container">
+            <h1 class="text-uppercase text-center h2">Générateur&nbsp;de&nbsp;règles&nbsp;OPR</h1>
+            <div class="row">
+                <div class="text-center">
+                    <input type="button" class="btn btn-primary"
+                           onclick="doRoll()"
+                           value="Roll for Rules"
+                    />
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row pt-2" >
-        <div>
-            <div class="card text-dark bg-light mb-3">
-                <div class="card-body">
-                    <div class="card-title fw-bold text-uppercase"><span class="">Mission</span>&nbsp;
-                        <span id="missionCode"></span></div>
-                    <div class="card-text" id="mission"></div>
+            <div class="row pt-2">
+                <div>
+                    <div class="card text-dark bg-light mb-3">
+                        <div class="card-body">
+                            <div class="card-title"><span class="fw-bold text-uppercase">Déploiement</span></div>
+                            <div class="card-text" id="deployment"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row pt-2">
+                <div>
+                    <div class="card text-dark bg-light mb-3">
+                        <div class="card-body">
+                            <div class="card-title fw-bold text-uppercase"><span class="">Mission</span>&nbsp;
+                                <span id="missionCode"></span></div>
+                            <div class="card-text" id="mission"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-    </div>
+        <script>
 
-
-</div>
-<script>
-
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max) ;
-    }
-    function doRoll() {
-        let depDiv = document.getElementById('deployment');
-        let missionDiv = document.getElementById('mission');
-        let missionCode = document.getElementById('missionCode');
-
-        let deployment = getRandomInt(6);
-        let missionStyle = getRandomInt(3);
-        let mission = getRandomInt(6);
-
-        const deploymentResult = [
-            "No Man's Land",
-            "Long Haul",
-            "Flank Assault",
-            "Frontal Clash",
-            "Tactical Push",
-            "Meeting Engagement"
-        ];
-
-        const missionStyleArray = [
-            "Face-Off",
-            "Progressive Scoring",
-            "Attack & Defend",
-        ];
-
-        const missionArray = {
-            "Face-Off" : {
-                "1":"Duel",
-                "2":"Seize Ground",
-                "3":"Relic Hunt",
-                "4":"Sabotage",
-                "5":"Breakthrough",
-                "6":"King of the Hill",
-            },
-            "Progressive Scoring" : {
-                "1":"Pitched Battle",
-                "2":"Domination",
-                "3":"Capture & Hold",
-                "4":"Demolition",
-                "5":"Headquarters",
-                "6":"Mosh Pit",
-            },
-            "Attack & Defend" : {
-                "1":"The Raid",
-                "2":"Smash & Grab",
-                "3":"Ambush",
-                "4":"Last Stand",
-                "5":"VIP Escort",
-                "6":"The Rescue",
-            },
-        };
-
-        let missionStyleString = '';
-        let missionString = '';
-
-        for (var i in missionArray) {
-            if (i === missionStyleArray[missionStyle]) {
-                missionStyleString = i;
-                missionString = missionArray[i][mission+1];
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
             }
-        }
+            function doRoll() {
+                let depDiv = document.getElementById('deployment');
+                let missionDiv = document.getElementById('mission');
+                let missionCode = document.getElementById('missionCode');
 
-        depDiv.innerHTML =
-            `${deploymentResult[deployment]}`
-        ;
+                let deployment = getRandomInt(6);
+                let missionStyle = getRandomInt(3);
+                let mission = getRandomInt(6);
 
-        missionDiv.innerHTML =
-            `<p>${missionStyleString} : ${missionString}</p>`
-        ;
-        missionCode.innerHTML = `n°${missionStyle+1}.${mission+1}`;
-    }
-</script>
-</body>
+                const deploymentResult = [
+                    "No Man's Land",
+                    "Long Haul",
+                    "Flank Assault",
+                    "Frontal Clash",
+                    "Tactical Push",
+                    "Meeting Engagement"
+                ];
+
+                const missionStyleArray = [
+                    "Face-Off",
+                    "Progressive Scoring",
+                    "Attack & Defend",
+                ];
+
+                const missionArray = {
+                    "Face-Off": {
+                        "1": {
+                            "title": "Duel",
+                            "description": "After the table has been prepared, the players must set up a total of D3+2 objective markers on the battlefield."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that controls most markers wins."
+                                + "<br/><br/>Note that this is the standard mission from the core rules."
+                        },
+                        "2": {
+                            "title": "Seize Ground",
+                            "description": "After the table has been prepared, the players must set up a total of 4 objective markers on the battlefield."
+                                + "<br/>Divide the non-deployment zone area of the table into 4 equal quarters, and place one marker at the center of each."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that controls most markers wins."
+                        },
+                        "3": {
+                            "title": "Relic Hunt",
+                            "description": "After the table has been prepared, the players must set up a total of 3 objective markers on the battlefield."
+                                + "<br/>If a unit seizes a marker, remove it from the table, and it counts as being carried by the unit. If the unit is shaken or destroyed at any point, the marker is dropped on the spot."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that controls most markers wins."
+                        },
+                        "4": {
+                            "title": "Sabotage",
+                            "description":
+                                "After the table has been prepared, the players must set up 1 objective marker each 12” away from their table edge."
+                                + "<br/>Each objective marker belongs to the player that placed it, and if at any point a unit seizes the enemy objective marker, then the marker is destroyed and removed from play."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that managed to destroy the enemy marker whilst keeping their own marker intact wins."
+                        },
+                        "5": {
+                            "title": "Breakthrough",
+                            "description":
+                                "After the table has been prepared, the players must set up 1 objective marker each on the battlefield."
+                                + "<br/>The objective markers must be placed at the center of each player’s deployment zone, 12” away from the table edge."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that controls most markers wins."
+                        },
+                        "6": {
+                            "title": "King of the Hill",
+                            "description":
+                                "After the table has been prepared, the players must set up only 1 objective marker on the battlefield."
+                                + "<br/>The objective marker must be placed over 9” away from the deployment zones and the table edges."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that controls the marker wins."
+                        },
+                    },
+                    "Progressive Scoring": {
+                        "1": {
+                            "title": "Pitched Battle",
+                            "description":
+                                "After the table has been prepared, the players must set up a total of D3+2 objective markers on the battlefield."
+                                + "<br/>At the end of each round players get 1 VP for each objective marker they seized, and at the end of the game players get 1 VP if they seized more markers than their opponent."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                        "2": {
+                            "title": "Domination",
+                            "description":
+                                "After the table has been prepared, the players must set up a total of 4 objective markers on the battlefield."
+                                + "<br/>Divide the non-deployment zone area of the table into 4 equal quarters, and place one marker at the center of each."
+                                + "<br/>At the end of each round players get 1 VP for each objective marker they seized, as well as 1 VP if they seized more objective markers than their opponent."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                        "3": {
+                            "title": "Capture & Hold",
+                            "description":
+                                "After the table has been prepared, the players must set up a total of 3 objective markers on the battlefield."
+                                + "<br/>If a unit seizes a marker, remove it from the table, and it counts as being carried by the unit. If the unit is shaken or destroyed at any point, the marker is dropped on the spot."
+                                + "<br/>At the end of each round players get 1 VP for each objective marker they seized, and at the end of the game players get 1 VP if they seized more markers than their opponent."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                        "4": {
+                            "title": "Demolition",
+                            "description":
+                                "After the table has been prepared, the players must set up 1 objective marker each 12” away from their table edge."
+                                + "<br/>Each objective marker belongs to the player that placed it, and if at any point a unit seizes the enemy objective marker, then the marker is destroyed and removed from play."
+                                + "<br/>At the end of each round players get 1 VP if their objective marker has not been destroyed, and 1 VP if they destroy the enemy marker whilst their own marker was already destroyed."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                        "5": {
+                            "title": "Headquarters",
+                            "description":
+                                "After the table has been prepared, the players must set up 1 objective marker each on the battlefield."
+                                + "<br/>The objective markers must be placed at the center of each player’s deployment zone, 12” away from the table edge."
+                                + "<br/>At the end of each round players get 1 VP for each objective marker they seized, and at the end of the game players get 1 VP if they seized more markers than their opponent."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                        "6": {
+                            "title": "Mosh Pit",
+                            "description":
+                                "After the table has been prepared, the players must set up only 1 objective marker on the battlefield."
+                                + "<br/>The objective marker must be placed over 9” away from the deployment zones and the table edges."
+                                + "<br/>At the end of each round players get 1 VP if they seized the objective marker, and 1 VP if they seized the marker whilst it was not already seized by the enemy."
+                                + "<br/>After 4 rounds have been played the game ends, and the player that scored most VPs wins."
+                        },
+                    },
+                    "Attack & Defend": {
+                        "1": {
+                            "title": "The Raid",
+                            "description":
+                                "The attacking army gets 25% more points than the defender."
+                                + "<br/>After the table has been prepared, the defender must set up 1 objective marker within 12” of the table center, and must then deploy half of its units within 12” of the marker."
+                                + "<br/>The attacker then deploys all of its units anywhere within 12” of any table edge, and after that the defender must deploy its remaining units anywhere on the table over 12” away from enemy units, and over 12” away from the marker."
+                                + "<br/>After 6 rounds have been played the game ends, and the player that controls the marker wins."
+                        },
+                        "2": {
+                            "title": "Smash & Grab",
+                            "description":
+                                "The attacking army gets 25% more points than the defender."
+                                + "<br/>After the table has been prepared, the defender must set up a total of D3+2 objective markers on the battlefield, and then secretly mark one of them as a trap, and one of them as a relic."
+                                + "<br/>When an attacker’s unit seizes a marker, the defender must reveal what it was. If it was a trap the unit takes D6+1 hits, and if it was not the relic then the marker is removed."
+                                + "<br/>If it was the relic, then the unit seizes it and removes it from the table, counting as carrying it. If the unit is shaken or destroyed at any point, the marker is dropped on the spot."
+                                + "<br/>After 6 rounds have been played the game ends, and if the marker is within 6” of any table edge, then the attacker wins, else the defender wins."
+                        },
+                        "3": {
+                            "title": "Ambush",
+                            "description":
+                                "After the table has been prepared, the players must set up a total of D3 objective markers on the battlefield, starting with the defender."
+                                + "<br/>After the table has been prepared, the defender must first deploy half of its units in their deployment zone, and then the attacker must deploy all of its units anywhere on the table over 12” away from enemy units, but within 6” of at least one other friendly unit. Finally, the defender may deploy the rest of its units anywhere on the table, over 12” away from enemy units."
+                                + "<br/>After 6 rounds have been played the game ends, and the player that controls most markers wins."
+                        },
+                        "4": {
+                            "title": "Last Stand",
+                            "description":
+                                "After the table has been prepared, the defending player must set up 1 objective marker within 12” of the table centre."
+                                + "<br/>After the table has been prepared, the defender must deploy all of its units within 12” of the table center, and then the attacker deploys all of its units within 12” of any table edge"
+                                + "<br/>Whenever an attacker’s unit is fully destroyed for the first time, it is placed in reserves. At the beginning of each round, the attacker rolls one die for each unit in reserve, and on a 6 may place it within 12” of any table edge."
+                                + "<br/>The attacker’s units may only be placed in reserves once, and if at the beginning of a round the attacker has no units on the table, then any remaining reserves are destroyed."
+                                + "<br/>After 6 rounds have been played the game ends, and the player that controls the marker wins."
+                        },
+                        "5": {
+                            "title": "VIP Escort",
+                            "description": "After the table has been prepared, the defender must set up 1 objective marker within 6” of any table edge, and must then deploy all of its units within 12” of it. The attacker then deploys all of its units anywhere within 12” of any table edge, and over 12” away from enemy units."
+                                + "<br/>At the beginning of each round, if the defender has seized the marker, then they may move it by up to 12” in any direction."
+                                + "<br/>After 6 rounds have been played the game ends, and if the marker is within 6” of the table edge opposite of the one it was deployed on, then the defender wins, else the attacker wins."
+                        },
+                        "6": {
+                            "title": "The Rescue",
+                            "description":
+                                "The attacking army gets 25% more points than the defender."
+                                + "<br/>After the table has been prepared, the defending player must set up 1 objective marker within 12” of the table centre."
+                                + "<br/>Players may only deploy up to half of their units, and keep the other half in reserves. At the beginning of each round after the first, the players must roll one die for each unit in reserves, and on a 4+ may place it within 12” of any table edge, over 12” away from enemy units and the objective marker."
+                                + "<br/>If an attacking unit seizes the marker, remove it from the table, and it counts as being carried by the unit. If the unit is shaken or destroyed at any point, the marker is dropped on the spot and the defender may move it by up to 6” in any direction."
+                                + "<br/>After 6 rounds have been played the game ends, and if the marker is within 6” of any table edge, then the attacker wins, else the defender wins."
+                        },
+                    },
+                };
+
+                depDiv.innerHTML =
+                        `${deploymentResult[deployment]}`
+                    ;
+
+                missionDiv.innerHTML =
+                        `<p class="fw-bold text-uppercase">${
+            missionArray[missionStyleArray[missionStyle]][mission + 1]["title"]
+            }</p>` +
+                        `<div>${
+            missionArray[missionStyleArray[missionStyle]][mission + 1]["description"]
+            }</div>`
+                    ;
+                missionCode.innerHTML = `n°${missionStyle + 1}.${mission + 1}`;
+            }
+        </script>
+    </body>
 </html>
