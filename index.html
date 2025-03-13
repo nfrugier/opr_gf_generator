@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Generateur de regles OPR</title>
 </head>
-<body>
+<body class="bg-light">
 <div class="container">
     <h1 class="">Générateur de règles OPR</h1>
     <div class="row">
@@ -17,14 +17,29 @@
             />
         </div>
     </div>
-    <div class="row pt-2" id="results">
-        <div class="col" id="deployment">
-
-        </div>
-        <div class="col" id="mission">
-
+    <div class="row pt-2" >
+        <div>
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <div class="card-title"><span class="fw-bold text-uppercase">Déploiement</span></div>
+                    <div class="card-text" id="deployment"></div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="row pt-2" >
+        <div>
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <div class="card-title fw-bold text-uppercase"><span class="">Mission</span>&nbsp;
+                        <span id="missionCode"></span></div>
+                    <div class="card-text" id="mission"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <script>
 
@@ -32,15 +47,15 @@
         return Math.floor(Math.random() * max) ;
     }
     function doRoll() {
-        let resultDiv = document.getElementById('results');
         let depDiv = document.getElementById('deployment');
         let missionDiv = document.getElementById('mission');
+        let missionCode = document.getElementById('missionCode');
 
         let deployment = getRandomInt(6);
         let missionStyle = getRandomInt(3);
         let mission = getRandomInt(6);
 
-        let deploymentResult = [
+        const deploymentResult = [
             "No Man's Land",
             "Long Haul",
             "Flank Assault",
@@ -49,13 +64,13 @@
             "Meeting Engagement"
         ];
 
-        let missionStyleArray = [
+        const missionStyleArray = [
             "Face-Off",
             "Progressive Scoring",
             "Attack & Defend",
         ];
 
-        let missionArray = {
+        const missionArray = {
             "Face-Off" : {
                 "1":"Duel",
                 "2":"Seize Ground",
@@ -93,14 +108,13 @@
         }
 
         depDiv.innerHTML =
-            `<p>Déploiement :</p>` +
-            `<p class="fw-bold">${deploymentResult[deployment]}</p>`
+            `${deploymentResult[deployment]}`
         ;
 
         missionDiv.innerHTML =
-            `<p>Mission n°${missionStyle+1}.${mission+1}:</p>` +
             `<p>${missionStyleString} : ${missionString}</p>`
         ;
+        missionCode.innerHTML = `n°${missionStyle+1}.${mission+1}`;
     }
 </script>
 </body>
