@@ -24,6 +24,10 @@
                             <div class="card-title"><span class="fw-bold text-uppercase">Déploiement</span></div>
                             <div class="card-text" id="deployment"></div>
                         </div>
+                        <div class="text-center">
+                            <img src="" width="" class="d-none" alt="deployment image" id="depimage">
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -48,6 +52,7 @@
             }
             function doRoll() {
                 let depDiv = document.getElementById('deployment');
+                let depImg = document.getElementById('depimage');
                 let missionDiv = document.getElementById('mission');
                 let missionCode = document.getElementById('missionCode');
 
@@ -62,6 +67,16 @@
                     "Frontal Clash",
                     "Tactical Push",
                     "Meeting Engagement"
+                ];
+
+                const deploymentImages = [
+                    "img/nomansland.png",
+                    "img/longhaul.png",
+                    "img/flank.png",
+                    "img/frontalclash.png",
+                    "img/tacticalpush.png",
+                    "img/meeting.png",
+
                 ];
 
                 const missionStyleArray = [
@@ -213,6 +228,8 @@
                     },
                 };
 
+                depImg.classList.remove('d-none');
+                depImg.src = deploymentImages[deployment];
                 depDiv.innerHTML =
                         `${deploymentResult[deployment]}`
                     ;
