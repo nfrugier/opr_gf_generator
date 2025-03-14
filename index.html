@@ -15,6 +15,10 @@
                            onclick="doRoll()"
                            value="Roll for Rules"
                     />
+                    <div class="col-12">
+                        <label for="asym">Scénario asymétrique ?</label>
+                        <input type="checkbox" value="test" name="asym" id="asym">
+                    </div>
                 </div>
             </div>
             <div class="row pt-2">
@@ -35,7 +39,7 @@
                 <div>
                     <div class="card text-dark bg-light mb-3">
                         <div class="card-body">
-                            <div class="card-title fw-bold text-uppercase"><span class="">Mission</span>&nbsp;
+                            <div class="card-title fw-bold text-uppercase">Mission&nbsp;
                                 <span id="missionCode"></span></div>
                             <div class="card-text" id="mission"></div>
                         </div>
@@ -51,13 +55,15 @@
                 return Math.floor(Math.random() * max);
             }
             function doRoll() {
+                let asym = document.getElementById('asym');
+                console.log(asym.checked);
                 let depDiv = document.getElementById('deployment');
                 let depImg = document.getElementById('depimage');
                 let missionDiv = document.getElementById('mission');
                 let missionCode = document.getElementById('missionCode');
 
                 let deployment = getRandomInt(6);
-                let missionStyle = getRandomInt(3);
+                let missionStyle = getRandomInt(asym.checked === true ? 3 : 2);
                 let mission = getRandomInt(6);
 
                 const deploymentResult = [
